@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=78", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rife-superboost-tensorrt"
+version = "0.1.0.dev8"
+description = "Optional Windows x64 TensorRT backend for RIFE-SuperBoost"
+requires-python = ">=3.10"
+license = "MIT AND LicenseRef-NVIDIA-CUDA"
+license-files = ["LICENSE", "src/rife_superboost_tensorrt/licenses/*"]
+readme = "README.md"
+dependencies = ["RIFE-SuperBoost==0.1.0.dev8", "tensorrt-cu13-libs==10.16.1.11"]
+
+[project.entry-points."rife_superboost.backends"]
+tensorrt = "rife_superboost_tensorrt:TensorRT"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+rife_superboost_tensorrt = ["_native/*.dll", "_native/*.exe", "_native/*.json", "licenses/*"]

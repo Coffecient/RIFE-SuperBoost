@@ -1,0 +1,586 @@
+{
+  "schema_version": 1,
+  "project": "RIFE-SuperBoost",
+  "version": "0.1.0.dev4",
+  "status": "validated-development-assets",
+  "path_base": "RIFE-SuperBoost",
+  "models": [
+    {
+      "id": "4.25",
+      "descriptor": "build/m4-models/4.25/model.json",
+      "descriptor_sha256": "cb8131e5c8b08b0b47c622295d812cb6c352edb0dd935847b6c2ac372f060266",
+      "assets": {
+        "fp32": {
+          "full": {
+            "file": "fp32/full.onnx",
+            "sha256": "7d1f284e32353d6fa713727a4e9b7c54241c6ff41e5a4ce866f16692459f79ba",
+            "bytes": 24826449
+          },
+          "encoder": {
+            "file": "fp32/encoder.onnx",
+            "sha256": "348146cdca98a2365a95be2e38e67c7b2f6658ba10418f2d0dc44e03676faec2",
+            "bytes": 31399
+          },
+          "synthesis": {
+            "file": "fp32/synthesis.onnx",
+            "sha256": "02b24e795231c7888ed1b5b43c7e2455f3826479e9c1bb279e8851d1a8a3cc89",
+            "bytes": 24754069
+          }
+        },
+        "fp16": {
+          "full": {
+            "file": "fp16/full.onnx",
+            "sha256": "d8bcfbddb2454d0644650adc0b26ca4888a479cf090ed3832e28082243c08145",
+            "bytes": 12509485
+          },
+          "encoder": {
+            "file": "fp16/encoder.onnx",
+            "sha256": "2f4b522aeda01e15fcac198437ae39e6b87fdbea074445ae2268c9a59488807c",
+            "bytes": 17033
+          },
+          "synthesis": {
+            "file": "fp16/synthesis.onnx",
+            "sha256": "3f04216056e832d2a705e95fd2c7e8f4b1760e1a1fc1d1171cb20b382c384309",
+            "bytes": 12448034
+          }
+        }
+      },
+      "contract_fp16": "m4-mixed-v1",
+      "policy": {
+        "convolutions": "fp16",
+        "residual_beta_accumulation": "fp32",
+        "flow_state_resize_grid_warp_blend": "fp32",
+        "io_cache_storage": "fp32"
+      },
+      "beta_parameters_exact_fp32": 40,
+      "alignment": 128,
+      "encoding_channels": 4,
+      "scales": [
+        16,
+        8,
+        4,
+        2,
+        1
+      ],
+      "checkpoint_sha256": "6615790efd627772917205db291f51cd392528a157ecbb2ecaeec3bff8eb6de2",
+      "source_fp32_sha256": "7d1f284e32353d6fa713727a4e9b7c54241c6ff41e5a4ce866f16692459f79ba",
+      "provenance": {
+        "official_source": {
+          "project": "hzwer/Practical-RIFE",
+          "reference_commit": "de9a989bb7b8a71d94f058297e603633aaa43ad6",
+          "license": "MIT",
+          "license_file": "LICENSE.Practical-RIFE",
+          "model_page": "https://github.com/hzwer/Practical-RIFE/tree/de9a989bb7b8a71d94f058297e603633aaa43ad6#trained-model",
+          "download_page": "https://drive.google.com/file/d/1ZKjcbmt1hypiFprJPIKW0Tt0lr_2i7bg/view",
+          "download_url": "https://drive.usercontent.google.com/download?id=1ZKjcbmt1hypiFprJPIKW0Tt0lr_2i7bg&export=download&confirm=t"
+        },
+        "archive_sha256": "e63d481b7ae5d4a4e6ad7ac5b410ff78f3bf7be3b51b2e38ca8152747abde5b4",
+        "checkpoint_sha256": "6615790efd627772917205db291f51cd392528a157ecbb2ecaeec3bff8eb6de2",
+        "source_files": [
+          {
+            "path": "assets/upstream/4.25/source/IFNet_HDv3.py",
+            "archive_member": "train_log/IFNet_HDv3.py",
+            "bytes": 6433,
+            "sha256": "655b4c772b037967b86c2dd31c8fa3b5323b79dd9a0e0088708d89149bbc8a32"
+          },
+          {
+            "path": "assets/upstream/4.25/source/refine.py",
+            "archive_member": "train_log/refine.py",
+            "bytes": 3510,
+            "sha256": "0c5698b4a05b9f6ab551740575c1c35e248e5b1829bab6445186081ebe15f032"
+          },
+          {
+            "path": "assets/upstream/4.25/source/RIFE_HDv3.py",
+            "archive_member": "train_log/RIFE_HDv3.py",
+            "bytes": 3101,
+            "sha256": "81bbd0648e499de79e44768d284005d9d57d0f6eb7c30adae407f22675055730"
+          }
+        ],
+        "license": "MIT",
+        "copyright": "Copyright (c) 2021 hzwer",
+        "reference_profile": {
+          "stage_scale_denominators": [
+            16,
+            8,
+            4,
+            2,
+            1
+          ],
+          "encoding_channels": 4,
+          "warp_channels_per_source": 7,
+          "padding": {
+            "mode": "constant",
+            "value": 0,
+            "sides": [
+              "right",
+              "bottom"
+            ],
+            "default_alignment": 128,
+            "structural_alignment_candidate": 64
+          },
+          "additional_input_clamp": false,
+          "grid_sample": {
+            "mode": "bilinear",
+            "padding_mode": "border",
+            "align_corners": true
+          },
+          "reference_onnx": {
+            "manifest": "reference-manifest.json",
+            "model_id": "4.25"
+          },
+          "tensorrt_engine": null
+        },
+        "environment": {
+          "python": "3.13.15",
+          "platform": "Windows-11-10.0.26300-SP0",
+          "packages": {
+            "torch": "2.14.1+cu130",
+            "onnx": "1.23.2",
+            "onnxruntime": "1.31.1",
+            "numpy": "2.5.4"
+          },
+          "torch_cuda_build": "13.0"
+        }
+      },
+      "source_provenance_path_base": "RIFE-SuperBoost/models",
+      "license_sha256": "7932fb49341512b959b1744a6d9cbb39e5a1ec89da438a34d0454d5d8df9fecd",
+      "exporter_sha256": {
+        "export_mixed.py": "a0a75d52915beaf6125cd2ca570b65c7c9d2fd06f55e2956014455db36e47714",
+        "network.py": "1327fcf3790a81be9dc3f48e7c3e118a1d657a0db3a774d6119f53b266f86f25"
+      }
+    },
+    {
+      "id": "4.25-lite",
+      "descriptor": "build/m4-models/4.25-lite/model.json",
+      "descriptor_sha256": "1c998049dd5f89ae4fd36aba2d9286b4d3db34eec9d183d74bc38b440396d24a",
+      "assets": {
+        "fp32": {
+          "full": {
+            "file": "fp32/full.onnx",
+            "sha256": "10f6c66bc938156758971edbcdc78ebcce713a4a3bce2b68612320cfb46985ce",
+            "bytes": 24661715
+          },
+          "encoder": {
+            "file": "fp32/encoder.onnx",
+            "sha256": "52e39526570fd672bcbf59883ed265f926bc6ae8551ce4d91e188352ff0cd95b",
+            "bytes": 31404
+          },
+          "synthesis": {
+            "file": "fp32/synthesis.onnx",
+            "sha256": "4a1827c40b6ec2e6eb2a96dc048bd6b28eb5262a53e2dc141ae5335b4b63d1f1",
+            "bytes": 24589334
+          }
+        },
+        "fp16": {
+          "full": {
+            "file": "fp16/full.onnx",
+            "sha256": "0c4608f91fa201cdfadb1b6efb4d3eadc389d207a6292eb0464343e97290a0c9",
+            "bytes": 12426978
+          },
+          "encoder": {
+            "file": "fp16/encoder.onnx",
+            "sha256": "f926a0ea95947cfe67fc9f5ef4e4b4513333501924c69e113c1edc40311bc18b",
+            "bytes": 17038
+          },
+          "synthesis": {
+            "file": "fp16/synthesis.onnx",
+            "sha256": "ff718b3e0746afc21b8da05eee5ad0bcdc0f14d188abb3f8c4af92e03f9c033e",
+            "bytes": 12365527
+          }
+        }
+      },
+      "contract_fp16": "m4-mixed-v1",
+      "policy": {
+        "convolutions": "fp16",
+        "residual_beta_accumulation": "fp32",
+        "flow_state_resize_grid_warp_blend": "fp32",
+        "io_cache_storage": "fp32"
+      },
+      "beta_parameters_exact_fp32": 40,
+      "alignment": 128,
+      "encoding_channels": 4,
+      "scales": [
+        32,
+        16,
+        8,
+        4,
+        1
+      ],
+      "checkpoint_sha256": "81cdba223fe72a120130cc8552e5d2ecac824259d406f0c15323b3decf96b8b1",
+      "source_fp32_sha256": "10f6c66bc938156758971edbcdc78ebcce713a4a3bce2b68612320cfb46985ce",
+      "provenance": {
+        "official_source": {
+          "project": "hzwer/Practical-RIFE",
+          "reference_commit": "de9a989bb7b8a71d94f058297e603633aaa43ad6",
+          "license": "MIT",
+          "license_file": "LICENSE.Practical-RIFE",
+          "model_page": "https://github.com/hzwer/Practical-RIFE/tree/de9a989bb7b8a71d94f058297e603633aaa43ad6#trained-model",
+          "download_page": "https://drive.google.com/file/d/1zlKblGuKNatulJNFf5jdB-emp9AqGK05/view",
+          "download_url": "https://drive.usercontent.google.com/download?id=1zlKblGuKNatulJNFf5jdB-emp9AqGK05&export=download&confirm=t"
+        },
+        "archive_sha256": "e84366c23e0eb1a637a55aad2e4f3442ec2bf4c388043b4aabbf590be289e6e8",
+        "checkpoint_sha256": "81cdba223fe72a120130cc8552e5d2ecac824259d406f0c15323b3decf96b8b1",
+        "source_files": [
+          {
+            "path": "assets/upstream/4.25-lite/source/IFNet_HDv3.py",
+            "archive_member": "train_log/IFNet_HDv3.py",
+            "bytes": 6433,
+            "sha256": "ea5eb5f05a391a2ac26402b16acf9fdb91968f299373f9be24aa4a8c5483d3d3"
+          },
+          {
+            "path": "assets/upstream/4.25-lite/source/refine.py",
+            "archive_member": "train_log/refine.py",
+            "bytes": 3510,
+            "sha256": "0c5698b4a05b9f6ab551740575c1c35e248e5b1829bab6445186081ebe15f032"
+          },
+          {
+            "path": "assets/upstream/4.25-lite/source/RIFE_HDv3.py",
+            "archive_member": "train_log/RIFE_HDv3.py",
+            "bytes": 3102,
+            "sha256": "7b7b1ed62b3d14ab5a130b397f928d6c4d7f95edb03def1190d2a655a20ad886"
+          }
+        ],
+        "license": "MIT",
+        "copyright": "Copyright (c) 2021 hzwer",
+        "reference_profile": {
+          "stage_scale_denominators": [
+            32,
+            16,
+            8,
+            4,
+            1
+          ],
+          "encoding_channels": 4,
+          "warp_channels_per_source": 7,
+          "padding": {
+            "mode": "constant",
+            "value": 0,
+            "sides": [
+              "right",
+              "bottom"
+            ],
+            "default_alignment": 128,
+            "structural_alignment_candidate": 128
+          },
+          "additional_input_clamp": false,
+          "grid_sample": {
+            "mode": "bilinear",
+            "padding_mode": "border",
+            "align_corners": true
+          },
+          "reference_onnx": {
+            "manifest": "reference-manifest.json",
+            "model_id": "4.25-lite"
+          },
+          "tensorrt_engine": null
+        },
+        "environment": {
+          "python": "3.13.15",
+          "platform": "Windows-11-10.0.26300-SP0",
+          "packages": {
+            "torch": "2.14.1+cu130",
+            "onnx": "1.23.2",
+            "onnxruntime": "1.31.1",
+            "numpy": "2.5.4"
+          },
+          "torch_cuda_build": "13.0"
+        }
+      },
+      "source_provenance_path_base": "RIFE-SuperBoost/models",
+      "license_sha256": "7932fb49341512b959b1744a6d9cbb39e5a1ec89da438a34d0454d5d8df9fecd",
+      "exporter_sha256": {
+        "export_mixed.py": "a0a75d52915beaf6125cd2ca570b65c7c9d2fd06f55e2956014455db36e47714",
+        "network.py": "1327fcf3790a81be9dc3f48e7c3e118a1d657a0db3a774d6119f53b266f86f25"
+      }
+    },
+    {
+      "id": "4.26",
+      "descriptor": "build/m4-models/4.26/model.json",
+      "descriptor_sha256": "7556db47a149b15a2510df44c1346a5cad7c70289ba491c7a663c1bda1b15ea0",
+      "assets": {
+        "fp32": {
+          "full": {
+            "file": "fp32/full.onnx",
+            "sha256": "8b0ab8d33273167057068892406b3ae774393560dc447e793eda2ffda802c22a",
+            "bytes": 24826449
+          },
+          "encoder": {
+            "file": "fp32/encoder.onnx",
+            "sha256": "ca4f5029cd3887867355978cf6ad8bd787f84efb153cc710217ee84510aa2368",
+            "bytes": 31399
+          },
+          "synthesis": {
+            "file": "fp32/synthesis.onnx",
+            "sha256": "922d60a1e7cf53f46d739b0119bd080e6ae9dd430948aa9ae8edcaabe8772a8b",
+            "bytes": 24754069
+          }
+        },
+        "fp16": {
+          "full": {
+            "file": "fp16/full.onnx",
+            "sha256": "31d7e31dc4feef7a415b3930cd3ad526baac4973d3e1f206a12eeecaf8cec2d6",
+            "bytes": 12509485
+          },
+          "encoder": {
+            "file": "fp16/encoder.onnx",
+            "sha256": "663559723d6536ea7709f8555bdd7e4927304ae298968b7af9f86ddaeb83210e",
+            "bytes": 17033
+          },
+          "synthesis": {
+            "file": "fp16/synthesis.onnx",
+            "sha256": "839a7103e40c31c1c705c3fe4212be2d4e2e6f09deb93f89215dc683008cbdf1",
+            "bytes": 12448034
+          }
+        }
+      },
+      "contract_fp16": "m4-mixed-v1",
+      "policy": {
+        "convolutions": "fp16",
+        "residual_beta_accumulation": "fp32",
+        "flow_state_resize_grid_warp_blend": "fp32",
+        "io_cache_storage": "fp32"
+      },
+      "beta_parameters_exact_fp32": 40,
+      "alignment": 128,
+      "encoding_channels": 4,
+      "scales": [
+        16,
+        8,
+        4,
+        2,
+        1
+      ],
+      "checkpoint_sha256": "45c7f74156704769dc9f85cfcaf8552e1e926f9399dcfa3a553dee88fac6f53f",
+      "source_fp32_sha256": "8b0ab8d33273167057068892406b3ae774393560dc447e793eda2ffda802c22a",
+      "provenance": {
+        "official_source": {
+          "project": "hzwer/Practical-RIFE",
+          "reference_commit": "de9a989bb7b8a71d94f058297e603633aaa43ad6",
+          "license": "MIT",
+          "license_file": "LICENSE.Practical-RIFE",
+          "model_page": "https://github.com/hzwer/Practical-RIFE/tree/de9a989bb7b8a71d94f058297e603633aaa43ad6#trained-model",
+          "download_page": "https://drive.google.com/file/d/1gViYvvQrtETBgU1w8axZSsr7YUuw31uy/view",
+          "download_url": "https://drive.usercontent.google.com/download?id=1gViYvvQrtETBgU1w8axZSsr7YUuw31uy&export=download&confirm=t"
+        },
+        "archive_sha256": "c2452dd2b244947d4be580156bbead60d6b72af5736860f7d6b3f99648c9c4cc",
+        "checkpoint_sha256": "45c7f74156704769dc9f85cfcaf8552e1e926f9399dcfa3a553dee88fac6f53f",
+        "source_files": [
+          {
+            "path": "assets/upstream/4.26/source/IFNet_HDv3.py",
+            "archive_member": "train_log/IFNet_HDv3.py",
+            "bytes": 6433,
+            "sha256": "655b4c772b037967b86c2dd31c8fa3b5323b79dd9a0e0088708d89149bbc8a32"
+          },
+          {
+            "path": "assets/upstream/4.26/source/refine.py",
+            "archive_member": "train_log/refine.py",
+            "bytes": 3510,
+            "sha256": "0c5698b4a05b9f6ab551740575c1c35e248e5b1829bab6445186081ebe15f032"
+          },
+          {
+            "path": "assets/upstream/4.26/source/RIFE_HDv3.py",
+            "archive_member": "train_log/RIFE_HDv3.py",
+            "bytes": 3101,
+            "sha256": "81bbd0648e499de79e44768d284005d9d57d0f6eb7c30adae407f22675055730"
+          }
+        ],
+        "license": "MIT",
+        "copyright": "Copyright (c) 2021 hzwer",
+        "reference_profile": {
+          "stage_scale_denominators": [
+            16,
+            8,
+            4,
+            2,
+            1
+          ],
+          "encoding_channels": 4,
+          "warp_channels_per_source": 7,
+          "padding": {
+            "mode": "constant",
+            "value": 0,
+            "sides": [
+              "right",
+              "bottom"
+            ],
+            "default_alignment": 128,
+            "structural_alignment_candidate": 64
+          },
+          "additional_input_clamp": false,
+          "grid_sample": {
+            "mode": "bilinear",
+            "padding_mode": "border",
+            "align_corners": true
+          },
+          "reference_onnx": {
+            "manifest": "reference-manifest.json",
+            "model_id": "4.26"
+          },
+          "tensorrt_engine": null
+        },
+        "environment": {
+          "python": "3.13.15",
+          "platform": "Windows-11-10.0.26300-SP0",
+          "packages": {
+            "torch": "2.14.1+cu130",
+            "onnx": "1.23.2",
+            "onnxruntime": "1.31.1",
+            "numpy": "2.5.4"
+          },
+          "torch_cuda_build": "13.0"
+        }
+      },
+      "source_provenance_path_base": "RIFE-SuperBoost/models",
+      "license_sha256": "7932fb49341512b959b1744a6d9cbb39e5a1ec89da438a34d0454d5d8df9fecd",
+      "exporter_sha256": {
+        "export_mixed.py": "a0a75d52915beaf6125cd2ca570b65c7c9d2fd06f55e2956014455db36e47714",
+        "network.py": "1327fcf3790a81be9dc3f48e7c3e118a1d657a0db3a774d6119f53b266f86f25"
+      }
+    },
+    {
+      "id": "4.26-large",
+      "descriptor": "build/m4-models/4.26-large/model.json",
+      "descriptor_sha256": "f780703e0d93a1fc8d8bd24749acff6413cc9f04791bebb3b0cb3183081df34e",
+      "assets": {
+        "fp32": {
+          "full": {
+            "file": "fp32/full.onnx",
+            "sha256": "14894b0308e46fb460341e7ac810354bb06d159ba776a2349febdd19f47de1fc",
+            "bytes": 25075485
+          },
+          "encoder": {
+            "file": "fp32/encoder.onnx",
+            "sha256": "5048ea8441e0d21ebb08ab9aa8071b565fb16a76ac261aa88db00fefb43a927f",
+            "bytes": 59249
+          },
+          "synthesis": {
+            "file": "fp32/synthesis.onnx",
+            "sha256": "412c8608b27347a8247825b091375b1814bffacf56c5bdeeb4d7c8403f30b803",
+            "bytes": 24975261
+          }
+        },
+        "fp16": {
+          "full": {
+            "file": "fp16/full.onnx",
+            "sha256": "a6495aea2507dd0c61b6df9a74369381aaebd5d1795cf605c655bccfef5f46d2",
+            "bytes": 12634009
+          },
+          "encoder": {
+            "file": "fp16/encoder.onnx",
+            "sha256": "9737323511c7656122be8635b3d02304695aba578414897f62e7389e75a3491b",
+            "bytes": 30963
+          },
+          "synthesis": {
+            "file": "fp16/synthesis.onnx",
+            "sha256": "3d88fe76cfb6e1434f1704d943a069e46dbbba30d67d3ce1488c916f01940afa",
+            "bytes": 12558634
+          }
+        }
+      },
+      "contract_fp16": "m4-mixed-v1",
+      "policy": {
+        "convolutions": "fp16",
+        "residual_beta_accumulation": "fp32",
+        "flow_state_resize_grid_warp_blend": "fp32",
+        "io_cache_storage": "fp32"
+      },
+      "beta_parameters_exact_fp32": 40,
+      "alignment": 128,
+      "encoding_channels": 16,
+      "scales": [
+        16,
+        8,
+        4,
+        2,
+        1
+      ],
+      "checkpoint_sha256": "4cc518e172156ad6207b9c7a43364f518832d83a4325d484240493a9e2980537",
+      "source_fp32_sha256": "14894b0308e46fb460341e7ac810354bb06d159ba776a2349febdd19f47de1fc",
+      "provenance": {
+        "official_source": {
+          "project": "hzwer/Practical-RIFE",
+          "reference_commit": "de9a989bb7b8a71d94f058297e603633aaa43ad6",
+          "license": "MIT",
+          "license_file": "LICENSE.Practical-RIFE",
+          "model_page": "https://github.com/hzwer/Practical-RIFE/tree/de9a989bb7b8a71d94f058297e603633aaa43ad6#trained-model",
+          "download_page": "https://drive.google.com/file/d/1vJy82jub1D9O8BZgjPeMu3HHx4bG-NY1/view",
+          "download_url": "https://drive.usercontent.google.com/download?id=1vJy82jub1D9O8BZgjPeMu3HHx4bG-NY1&export=download&confirm=t"
+        },
+        "archive_sha256": "93c0ec3dce359930059c1cc6733cff1d0c075314e30d352864436023bfc13463",
+        "checkpoint_sha256": "4cc518e172156ad6207b9c7a43364f518832d83a4325d484240493a9e2980537",
+        "source_files": [
+          {
+            "path": "assets/upstream/4.26-large/source/IFNet_HDv3.py",
+            "archive_member": "train_log/IFNet_HDv3.py",
+            "bytes": 6440,
+            "sha256": "c777e5db792914c7a5fb0d254607b79f13d43c409e59cb4fe6ba55153313ec64"
+          },
+          {
+            "path": "assets/upstream/4.26-large/source/refine.py",
+            "archive_member": "train_log/refine.py",
+            "bytes": 3510,
+            "sha256": "0c5698b4a05b9f6ab551740575c1c35e248e5b1829bab6445186081ebe15f032"
+          },
+          {
+            "path": "assets/upstream/4.26-large/source/RIFE_HDv3.py",
+            "archive_member": "train_log/RIFE_HDv3.py",
+            "bytes": 3101,
+            "sha256": "81bbd0648e499de79e44768d284005d9d57d0f6eb7c30adae407f22675055730"
+          }
+        ],
+        "license": "MIT",
+        "copyright": "Copyright (c) 2021 hzwer",
+        "reference_profile": {
+          "stage_scale_denominators": [
+            16,
+            8,
+            4,
+            2,
+            1
+          ],
+          "encoding_channels": 16,
+          "warp_channels_per_source": 19,
+          "padding": {
+            "mode": "constant",
+            "value": 0,
+            "sides": [
+              "right",
+              "bottom"
+            ],
+            "default_alignment": 128,
+            "structural_alignment_candidate": 64
+          },
+          "additional_input_clamp": false,
+          "grid_sample": {
+            "mode": "bilinear",
+            "padding_mode": "border",
+            "align_corners": true
+          },
+          "reference_onnx": {
+            "manifest": "reference-manifest.json",
+            "model_id": "4.26-large"
+          },
+          "tensorrt_engine": null
+        },
+        "environment": {
+          "python": "3.13.15",
+          "platform": "Windows-11-10.0.26300-SP0",
+          "packages": {
+            "torch": "2.14.1+cu130",
+            "onnx": "1.23.2",
+            "onnxruntime": "1.31.1",
+            "numpy": "2.5.4"
+          },
+          "torch_cuda_build": "13.0"
+        }
+      },
+      "source_provenance_path_base": "RIFE-SuperBoost/models",
+      "license_sha256": "7932fb49341512b959b1744a6d9cbb39e5a1ec89da438a34d0454d5d8df9fecd",
+      "exporter_sha256": {
+        "export_mixed.py": "a0a75d52915beaf6125cd2ca570b65c7c9d2fd06f55e2956014455db36e47714",
+        "network.py": "1327fcf3790a81be9dc3f48e7c3e118a1d657a0db3a774d6119f53b266f86f25"
+      }
+    }
+  ],
+  "distribution": "Pre-generated precision bundles. No playback graph conversion. Formal model wheels are M5."
+}

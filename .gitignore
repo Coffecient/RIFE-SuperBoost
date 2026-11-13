@@ -1,0 +1,38 @@
+# 本地上游模型资产；来源、摘要、许可与核对记录单独提交。
+/models/assets/
+/evaluation/assets/
+
+# 新工程的可重建输出。
+/build/
+/artifacts/
+/dist/
+/player-runtime/
+/.venv/
+*.egg-info/
+__pycache__/
+*.py[cod]
+*.engine
+*.plan
+*.onnx
+*.timing.cache
+*.whl
+
+# Privately staged local native build outputs; source and notices are tracked.
+*.dll
+*.exe
+/packages/*/build/
+/packages/models/*/build/
+/packages/models/*/src/*/assets/
+
+# Local development notes, experiment reports and evaluation material.
+# Keep third-party license texts available in the public source tree.
+/local-dev/
+/docs/*
+!/docs/licenses/
+/evaluation/
+/CHANGELOG.zh-CN.md
+/models/evidence/
+/packages/README.zh-CN.md
+
+# Generated native binary identities belong with local build artifacts.
+/packages/backend-tensorrt/src/rife_superboost_tensorrt/_native/build-info.json

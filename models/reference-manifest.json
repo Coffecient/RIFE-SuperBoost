@@ -1,0 +1,2000 @@
+{
+  "schema_version": 1,
+  "project": "RIFE-SuperBoost",
+  "milestone": "M1",
+  "completed_on": "2026-11-11",
+  "status": "complete",
+  "path_base": "RIFE-SuperBoost",
+  "purpose": "Internal unoptimized official FP32 references; not production optimized model packages.",
+  "environment": {
+    "python": "3.13.15",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "packages": {
+      "torch": "2.14.1+cu130",
+      "onnx": "1.23.2",
+      "onnxruntime": "1.31.1",
+      "numpy": "2.5.4"
+    },
+    "torch_cuda_build": "13.0"
+  },
+  "models": [
+    {
+      "id": "4.25",
+      "status": "reference_validated",
+      "artifact": {
+        "path": "build/reference/rife-4.25-reference-fp32.onnx",
+        "bytes": 22863763,
+        "sha256": "3dad16b29f68657f7d1b1a4e0eea28f465aae2c8f556858efee87b393d83df7c"
+      },
+      "export_metadata": "build/reference/rife-4.25-reference-fp32.export.json",
+      "contract": {
+        "images": "float32 [1, 3, H, W], RGB plane order, matching shapes",
+        "timestep": "float32 [1, 1, 1, 1], runtime scalar in [0, 1]",
+        "output": "float32 [1, 3, H, W], padded output; caller crops to source dimensions",
+        "spatial_axes": "dynamic H/W; aligned padded dimensions only, not arbitrary unpadded dimensions",
+        "minimum_structural_alignment": 64,
+        "official_preprocessing": "right/bottom zero padding to multiples of 128, then output crop",
+        "scales": [
+          16,
+          8,
+          4,
+          2,
+          1
+        ],
+        "scale": 1,
+        "additional_input_clamp": false,
+        "project_optimization_passes": []
+      },
+      "parameters": {
+        "checkpoint_sha256": "6615790efd627772917205db291f51cd392528a157ecbb2ecaeec3bff8eb6de2",
+        "raw_tensor_count": 198,
+        "tensor_count": 158,
+        "parameter_elements": 5664776,
+        "stripped_ddp_prefix_count": 198,
+        "ignored_training_only": [
+          {
+            "key": "teacher.conv0.0.0.weight",
+            "shape": [
+              32,
+              31,
+              3,
+              3
+            ],
+            "sha256": "bb6b5c0160a096a698e86ca0c98829e992214423e33f25e41a72691e34fa9f77"
+          },
+          {
+            "key": "teacher.conv0.0.0.bias",
+            "shape": [
+              32
+            ],
+            "sha256": "7db4bd06e56a3c4ff61310523edbf637354c491806233bba66826922b26ecfa7"
+          },
+          {
+            "key": "teacher.conv0.1.0.weight",
+            "shape": [
+              64,
+              32,
+              3,
+              3
+            ],
+            "sha256": "17fd8c48fcce2eefa68639a09cbe47cbcfc55fcc5f36def91274d08b7658e65d"
+          },
+          {
+            "key": "teacher.conv0.1.0.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "c8d6b218f6c443283b2dfcd78cd393926ed2efd6b61e8281e5078f41fcbebbd6"
+          },
+          {
+            "key": "teacher.lastconv.0.weight",
+            "shape": [
+              64,
+              52,
+              4,
+              4
+            ],
+            "sha256": "6f006c5daf3bb59f034233a58fb4117ec8c49899b5596589a668b0b474e59388"
+          },
+          {
+            "key": "teacher.lastconv.0.bias",
+            "shape": [
+              52
+            ],
+            "sha256": "4335ad71690fdde19f6a5e7e1ed92b07538a5a30f84aaca41c54c4427bfc0acd"
+          },
+          {
+            "key": "teacher.convblock.0.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "3475571e855850a5b635c357cafc5888fb298803308ecc5a85a52e12ada9e397"
+          },
+          {
+            "key": "teacher.convblock.0.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "3a8d20f0e69681040f26e003d7f58efafa4b8bb0e1449354fca30e0861fcd9f4"
+          },
+          {
+            "key": "teacher.convblock.0.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "1b33e5d040f58fc91af2f77660c4d96c3f94a368ebe2a3c7ef0900b6db5dd371"
+          },
+          {
+            "key": "teacher.convblock.1.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "032cf0158254055143624ac7d9ab03316031bc65baddda33c182ff4aaebefd87"
+          },
+          {
+            "key": "teacher.convblock.1.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "963089cedcf1cfc086243a2097fcc14cf182fc3085407d6be061629b691d2517"
+          },
+          {
+            "key": "teacher.convblock.1.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "9899786f0811f808b68b5977f1180c9572bee96ddbb41eb3320205757f3ace04"
+          },
+          {
+            "key": "teacher.convblock.2.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "0e986e1c771e60dc37cc446af91d9dddaf3fb488e4328cfcb78c447143a215f9"
+          },
+          {
+            "key": "teacher.convblock.2.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "0bdaccb939a6bf96e758bda197a50f59327a07c37cfa0fd6845aa8aab574c4c2"
+          },
+          {
+            "key": "teacher.convblock.2.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "df33c6fc66aca69ea8c794436fd878a4683b470f5d17725245286545ca2956cc"
+          },
+          {
+            "key": "teacher.convblock.3.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "a00ea05010e73f8fc60f1d8fd2003f310c0a9cb3005a0e5b80a33faf00361b94"
+          },
+          {
+            "key": "teacher.convblock.3.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "5cd17c50b77eb95f6407f639cd2a8490e08acf240f7b11548f47d08ae4516be1"
+          },
+          {
+            "key": "teacher.convblock.3.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "35cb1cd8e418371223cfb17f4bb3a08c1d82336fd528a09700288a909a699d8f"
+          },
+          {
+            "key": "teacher.convblock.4.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "4f817c73c26700f8f34b0e6e28d56e3f2a4733b0ef0e022b439812db7e63c204"
+          },
+          {
+            "key": "teacher.convblock.4.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "e3bb29c7c86e2c0d28b8976f2cd7b504f46874ce0bc50d3d5ba9f24b6c79ac64"
+          },
+          {
+            "key": "teacher.convblock.4.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "adc98ee2ae5f84b409c7907c28cea4b20c158dae88c6d42c89aa1bbc8c238fec"
+          },
+          {
+            "key": "teacher.convblock.5.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "e0698b1243e906c807872694848e51974688ca3bcd599798c12abc9eded1c289"
+          },
+          {
+            "key": "teacher.convblock.5.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "ac32defe33a9874e4575a186fae43000254cc99ff1a24bb292b6255f79f5e4d3"
+          },
+          {
+            "key": "teacher.convblock.5.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "4401bf881400cc617d1a71f9e1ba28c58561d8ea26dc1f6a202c6fb7486f45e2"
+          },
+          {
+            "key": "teacher.convblock.6.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "817c62a7fcbd2981203452ee4aac55e981633568a42424e4c2084ca450536b45"
+          },
+          {
+            "key": "teacher.convblock.6.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "14f0106b70106b0b32296674e77d7816af7e49e46e3730211837671f56a9dfaa"
+          },
+          {
+            "key": "teacher.convblock.6.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "feb6cb3214688ae0ecd25973436c27c143f55d97cee1dcef1be96006e349236b"
+          },
+          {
+            "key": "teacher.convblock.7.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "84c2b0bd9b287ecd90e3ed99012cc6ec0d31db0cf79f2d8a21d5f7ffd2809e3e"
+          },
+          {
+            "key": "teacher.convblock.7.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "cb1bbb6e769e0519ae01f14111e0ae9058271bd463e94a7d1e9b2ffeaa017d1e"
+          },
+          {
+            "key": "teacher.convblock.7.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "26177787218f6692ddcd0d5d1d402b9e02316df57e6230b17a67f09cf435b812"
+          },
+          {
+            "key": "caltime.0.weight",
+            "shape": [
+              32,
+              17,
+              3,
+              3
+            ],
+            "sha256": "2cc1200bc0756880cac29d64afdd49344f2d20694b6ac72a7bc03279fd6a7105"
+          },
+          {
+            "key": "caltime.0.bias",
+            "shape": [
+              32
+            ],
+            "sha256": "9e937746bc9bb6318bb0f61d3c18b766237f3d9ca6dbc15fced470105338525a"
+          },
+          {
+            "key": "caltime.2.weight",
+            "shape": [
+              64,
+              32,
+              3,
+              3
+            ],
+            "sha256": "cb0349389cffe5f69f41288c46068fafdc80a9dd49aca6463b2ef7c6f62b36d2"
+          },
+          {
+            "key": "caltime.2.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "ae61792bdbb0c0f3b5b7fb23ae8bc1cd2e38e7e41e6d4a0bf4ad2c7ef7d656a5"
+          },
+          {
+            "key": "caltime.4.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "00e8bad27b52d2b3c6038045a814f254eeadbe31cea1c4fb3bed53272d0f46d4"
+          },
+          {
+            "key": "caltime.4.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "b247d941dd97c889ba84fea85a30b0ea4fca86e89c98ee1abc513665ac21cffc"
+          },
+          {
+            "key": "caltime.6.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "b0a1144a3cbdf453e1d0d4e307f6911bb293fec263d78d8a28f546d1d0bdfc08"
+          },
+          {
+            "key": "caltime.6.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "22bd97369db8af84309d9a33642b1833da9deb91726dc5790f7d0e18b0b25bb2"
+          },
+          {
+            "key": "caltime.8.weight",
+            "shape": [
+              1,
+              64,
+              3,
+              3
+            ],
+            "sha256": "e737b694f3fea980b8998094a758b1e94c23f0154588860d0a0e6acaf895b038"
+          },
+          {
+            "key": "caltime.8.bias",
+            "shape": [
+              1
+            ],
+            "sha256": "6028dce1c99603984e8bdb984854985eb7a212514ec4c22fd6e6a038381dd51b"
+          }
+        ],
+        "training_schema_note": "Exact teacher/caltime keys and shapes audited from pinned checkpoints; the upstream inactive caltime comment has stale shapes.",
+        "strict": true
+      },
+      "verified_source_assets": {
+        "assets/upstream/4.25/original.zip": "e63d481b7ae5d4a4e6ad7ac5b410ff78f3bf7be3b51b2e38ca8152747abde5b4",
+        "assets/upstream/4.25/checkpoint/flownet.pkl": "6615790efd627772917205db291f51cd392528a157ecbb2ecaeec3bff8eb6de2",
+        "assets/upstream/4.25/source/IFNet_HDv3.py": "655b4c772b037967b86c2dd31c8fa3b5323b79dd9a0e0088708d89149bbc8a32",
+        "assets/upstream/4.25/source/refine.py": "0c5698b4a05b9f6ab551740575c1c35e248e5b1829bab6445186081ebe15f032",
+        "assets/upstream/4.25/source/RIFE_HDv3.py": "81bbd0648e499de79e44768d284005d9d57d0f6eb7c30adae407f22675055730",
+        "licenses/practical-rife/LICENSE": "7932fb49341512b959b1744a6d9cbb39e5a1ec89da438a34d0454d5d8df9fecd",
+        "licenses/practical-rife/README.upstream.md": "1680a353055121d7e58834ed956f2b3aa9b4e4d5f52a3725ec0b5a62b1332132",
+        "assets/reference/practical-rife/inference_video.upstream.py": "72070ee3a8f0f6878179c41a754748440e3dbf1614d3c923ef52f3030f68854c",
+        "assets/reference/practical-rife/warplayer.upstream.py": "eed94da2f2e8056fa0ceabed88b87fedf25ec849494991a956b9f2cbad33632c",
+        "licenses/holywu-vs-rife/LICENSE": "aea942caf766b16e6ef0b26e033fa92c0dea3124f6f7ad4a18ca1fb43e010d40"
+      },
+      "graph_audit": {
+        "checker": "passed",
+        "parameter_tensors_exact": 158,
+        "operator_counts": {
+          "Add": 75,
+          "Cast": 80,
+          "Concat": 86,
+          "Constant": 632,
+          "ConstantOfShape": 21,
+          "Conv": 56,
+          "ConvTranspose": 7,
+          "DepthToSpace": 5,
+          "Div": 64,
+          "Equal": 20,
+          "Expand": 21,
+          "Gather": 32,
+          "GridSample": 18,
+          "LeakyRelu": 56,
+          "Mul": 90,
+          "Range": 20,
+          "Reshape": 40,
+          "Resize": 14,
+          "Shape": 53,
+          "Sigmoid": 1,
+          "Slice": 46,
+          "Sub": 61,
+          "Tile": 1,
+          "Transpose": 10,
+          "Unsqueeze": 352,
+          "Where": 20
+        },
+        "grid_sample": {
+          "count": 18,
+          "mode": "bilinear",
+          "padding_mode": "border",
+          "align_corners": true
+        },
+        "all_stage_deconvolution_outputs": 52,
+        "custom_operators": [],
+        "input_clamp": false,
+        "input_output_shapes": {
+          "image0": [
+            1,
+            3,
+            "height",
+            "width"
+          ],
+          "image1": [
+            1,
+            3,
+            "height",
+            "width"
+          ],
+          "timestep": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "output": [
+            1,
+            3,
+            "height",
+            "width"
+          ]
+        }
+      },
+      "exporter": {
+        "api": "torch.onnx.export",
+        "dynamo": false,
+        "opset": 16,
+        "constant_folding": false,
+        "files": {
+          "__init__.py": "d794e04ae5a433c2ec393cdf639961ed47c008a0dfdc23fd2034fcb64213d156",
+          "assets.py": "6ce3e34fcf2a57ac6203127fee3ad2b2dc24c29a3e0db61fc4ee5887abe82faf",
+          "diagnose_reference.py": "97c4ccb6eee2bda98c67dec887595121ff4ff17d810222d3376e078b0114c928",
+          "export_reference.py": "0f20ea01de4d3861d7c5136d9bddd8b1b7b9135e28fe076114d14ce6ea32fcfa",
+          "reference.py": "a07548237eb41b9e82924c6332e5a736c824c45df6340ed0ff8c3742dac15c7d",
+          "upstream_oracle.py": "bd02bf9c9fd3b966898741a043e5f4407e20b6779ae5db3792a4a9aa9761dc03",
+          "verify_reference.py": "05278a5cee2c9d88687b9410f003b08f86af632af7bf31214ce3ebb868389e87"
+        }
+      },
+      "cpu_numerical_cases": 13,
+      "gpu_pytorch_cases": 6,
+      "release_alignment_status": "not_frozen_pending_real_content_review"
+    },
+    {
+      "id": "4.25-lite",
+      "status": "reference_validated",
+      "artifact": {
+        "path": "build/reference/rife-4.25-lite-reference-fp32.onnx",
+        "bytes": 22695446,
+        "sha256": "21946ee77c8870e5d720a947a24dc78fed3c889b73eba5d6864d5f5ccedde44f"
+      },
+      "export_metadata": "build/reference/rife-4.25-lite-reference-fp32.export.json",
+      "contract": {
+        "images": "float32 [1, 3, H, W], RGB plane order, matching shapes",
+        "timestep": "float32 [1, 1, 1, 1], runtime scalar in [0, 1]",
+        "output": "float32 [1, 3, H, W], padded output; caller crops to source dimensions",
+        "spatial_axes": "dynamic H/W; aligned padded dimensions only, not arbitrary unpadded dimensions",
+        "minimum_structural_alignment": 128,
+        "official_preprocessing": "right/bottom zero padding to multiples of 128, then output crop",
+        "scales": [
+          32,
+          16,
+          8,
+          4,
+          1
+        ],
+        "scale": 1,
+        "additional_input_clamp": false,
+        "project_optimization_passes": []
+      },
+      "parameters": {
+        "checkpoint_sha256": "81cdba223fe72a120130cc8552e5d2ecac824259d406f0c15323b3decf96b8b1",
+        "raw_tensor_count": 198,
+        "tensor_count": 158,
+        "parameter_elements": 5622700,
+        "stripped_ddp_prefix_count": 198,
+        "ignored_training_only": [
+          {
+            "key": "teacher.conv0.0.0.weight",
+            "shape": [
+              32,
+              31,
+              3,
+              3
+            ],
+            "sha256": "f5a4960b8a5be21edb724e8edbd3716705bee6b05f6a3dd208a24075bc096e8c"
+          },
+          {
+            "key": "teacher.conv0.0.0.bias",
+            "shape": [
+              32
+            ],
+            "sha256": "b433eed535ba0975af43932bd0434fe831b8ad18411da8b65fe2c26cf866edff"
+          },
+          {
+            "key": "teacher.conv0.1.0.weight",
+            "shape": [
+              64,
+              32,
+              3,
+              3
+            ],
+            "sha256": "0ea251f835720ed591ef6cf7898509cf61e91a6cb48955723cf2d45f9b37fdbb"
+          },
+          {
+            "key": "teacher.conv0.1.0.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "36fef76ea57f3b53ba2a9ffe56823ccb54f058c1b103444671e66710ace398cb"
+          },
+          {
+            "key": "teacher.lastconv.0.weight",
+            "shape": [
+              64,
+              52,
+              4,
+              4
+            ],
+            "sha256": "3a8106a58530f410040672c851b0aac4d5a0e5bd7de72c66b6987dfe73cfa14b"
+          },
+          {
+            "key": "teacher.lastconv.0.bias",
+            "shape": [
+              52
+            ],
+            "sha256": "5bb16f0c133a973ea336860700f8ba44cc0cee98f092f5f1cde6b32d725b5941"
+          },
+          {
+            "key": "teacher.convblock.0.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "944216d8c6c91d77388547f04b57ae6aeec6c42ef82f9536fb375e13f1cec40b"
+          },
+          {
+            "key": "teacher.convblock.0.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "176ea106e72b9cea39a488c91e68a52da0b2e8d7dbcfaa1138b01f214312da3d"
+          },
+          {
+            "key": "teacher.convblock.0.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "d67b5fc704aec9115e30f409483aea15f47611f61ce4d5443b8ed50afcde0cce"
+          },
+          {
+            "key": "teacher.convblock.1.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "6bc0d3cc2e376cb0944318eb4a8a747451dd3d61c514a132ccbf0827e068b68c"
+          },
+          {
+            "key": "teacher.convblock.1.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "aaa993e5f48e56b4e74cdd58dc924a769f443bfa973602b5dc8b81208a7ee9c7"
+          },
+          {
+            "key": "teacher.convblock.1.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "c5326e2287660bcf2be4a87ad05f093a737136eff8dc061ccd7666b6ae7fca64"
+          },
+          {
+            "key": "teacher.convblock.2.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "b6a503929ec8b66d1166afe532526cb3d9418975152ade9a2d20fea178cac5eb"
+          },
+          {
+            "key": "teacher.convblock.2.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "492b5bc355deb8260e0dd3196edbdebc12665bfc59743b870357d88233b9d66b"
+          },
+          {
+            "key": "teacher.convblock.2.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "bbdf6f11d46b8b81c8cd74a18032693b6d79e93e6c9389d3564833dd0c1bf14b"
+          },
+          {
+            "key": "teacher.convblock.3.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "ace9da04e55249a6d3d27f4cc4e73f86459ce283931e3ce16fa090b727715d3d"
+          },
+          {
+            "key": "teacher.convblock.3.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "280c3c99a9f129e967191b3c5be0da5687a95fd678d17434199b7cc5b4292754"
+          },
+          {
+            "key": "teacher.convblock.3.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "f45c73c75607b6473aa0906bcfc533feaf4de9e3c0a76d22e5debf734196917b"
+          },
+          {
+            "key": "teacher.convblock.4.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "9b84caf2a66b6a3015f02665e7f0fece5ca3a5ff3745371eaef27c72d89a4e84"
+          },
+          {
+            "key": "teacher.convblock.4.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "fa4f6352e1e26ac85b78f8f3aeed48275b78aeebbff33da37772c0d71ce512a4"
+          },
+          {
+            "key": "teacher.convblock.4.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "e75ced0a5226ca6563d0670e09b412fba83c59f78d439eeb7b52e52a41b8ac50"
+          },
+          {
+            "key": "teacher.convblock.5.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "56bbfb0d41c36d9ef5db514481b66f891185eee9a2ae9aaf2ab0eeff5ba2d4ea"
+          },
+          {
+            "key": "teacher.convblock.5.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "1e7b3a0fd33ce6d9b66ec5ddd6b8ca7375a65b212e23fbc4d6898908a74f09ba"
+          },
+          {
+            "key": "teacher.convblock.5.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "7426d46ecfa2bb3b4c31b61c5f9b0a5b607e6b110cfadbcc23f6d882f40c109a"
+          },
+          {
+            "key": "teacher.convblock.6.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "f61c0271aec1c8548d3d3cad454aa5e7bc7d2f6db1f89c8bb225c9f682ab6834"
+          },
+          {
+            "key": "teacher.convblock.6.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "a9dff008c63ba4f3a31c8adc85bfa871a813af053847f086c714e3f2031574e5"
+          },
+          {
+            "key": "teacher.convblock.6.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "cfc92eb0d4d5b37b3226d99f7ae62b2672ac7d7b70ab09fd2844c53ef52175ed"
+          },
+          {
+            "key": "teacher.convblock.7.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "85fd4ab5b8afe5d73e2113084e388869ff9a38eb3a86a611daf5e9b4f740210f"
+          },
+          {
+            "key": "teacher.convblock.7.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "7b6ad6f87f842e47a7dd7f44c7441751c9a11c87f3ce7b3e388e68e2bb52b51b"
+          },
+          {
+            "key": "teacher.convblock.7.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "23db3c8ddc416ab6d3c48c255c74f8f41393bbe817c5257c49633a4788524a00"
+          },
+          {
+            "key": "caltime.0.weight",
+            "shape": [
+              32,
+              17,
+              3,
+              3
+            ],
+            "sha256": "dbadf9f0098ddfabc3d1b2baed006edb43c28bb2bec864171c72b6d77ad5b355"
+          },
+          {
+            "key": "caltime.0.bias",
+            "shape": [
+              32
+            ],
+            "sha256": "ef5dbc02714cf1be76c7e28f04f3113dd87045bf2c573ae0c54e91a80bd72802"
+          },
+          {
+            "key": "caltime.2.weight",
+            "shape": [
+              64,
+              32,
+              3,
+              3
+            ],
+            "sha256": "dd28b513d7b55080d443733785301f28700adefb7ddc08390b232ce017af69e0"
+          },
+          {
+            "key": "caltime.2.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "9d0fc124d8767120144865ca3433cb7bec2dbe6b0ab7a80e33a2b8976c42e6e8"
+          },
+          {
+            "key": "caltime.4.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "e269c397f309806a346d29417caf826d6a48aa7295c9364a6cc16bd6d91c4b3f"
+          },
+          {
+            "key": "caltime.4.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "c05982aa2b70e22dd0159783d48b3ca1d886f973bbdb9a33613644af5d96a026"
+          },
+          {
+            "key": "caltime.6.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "8dbc32a61fcb0392a8f24f8d0b46caf2c39bdfd9898e503f060dd511107b0dac"
+          },
+          {
+            "key": "caltime.6.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "730801dfc511f7f72f2d3b805ea56d579b4414fcd0c98e563024e3dd18a99164"
+          },
+          {
+            "key": "caltime.8.weight",
+            "shape": [
+              1,
+              64,
+              3,
+              3
+            ],
+            "sha256": "7241ef3f113ef0021015b734620a5619f3076efb555500e1e9023a30ba7bd289"
+          },
+          {
+            "key": "caltime.8.bias",
+            "shape": [
+              1
+            ],
+            "sha256": "6618ab834678d5f991135ddc17317f663423078d2ea8b76a22103f85085bedac"
+          }
+        ],
+        "training_schema_note": "Exact teacher/caltime keys and shapes audited from pinned checkpoints; the upstream inactive caltime comment has stale shapes.",
+        "strict": true
+      },
+      "verified_source_assets": {
+        "assets/upstream/4.25-lite/original.zip": "e84366c23e0eb1a637a55aad2e4f3442ec2bf4c388043b4aabbf590be289e6e8",
+        "assets/upstream/4.25-lite/checkpoint/flownet.pkl": "81cdba223fe72a120130cc8552e5d2ecac824259d406f0c15323b3decf96b8b1",
+        "assets/upstream/4.25-lite/source/IFNet_HDv3.py": "ea5eb5f05a391a2ac26402b16acf9fdb91968f299373f9be24aa4a8c5483d3d3",
+        "assets/upstream/4.25-lite/source/refine.py": "0c5698b4a05b9f6ab551740575c1c35e248e5b1829bab6445186081ebe15f032",
+        "assets/upstream/4.25-lite/source/RIFE_HDv3.py": "7b7b1ed62b3d14ab5a130b397f928d6c4d7f95edb03def1190d2a655a20ad886",
+        "licenses/practical-rife/LICENSE": "7932fb49341512b959b1744a6d9cbb39e5a1ec89da438a34d0454d5d8df9fecd",
+        "licenses/practical-rife/README.upstream.md": "1680a353055121d7e58834ed956f2b3aa9b4e4d5f52a3725ec0b5a62b1332132",
+        "assets/reference/practical-rife/inference_video.upstream.py": "72070ee3a8f0f6878179c41a754748440e3dbf1614d3c923ef52f3030f68854c",
+        "assets/reference/practical-rife/warplayer.upstream.py": "eed94da2f2e8056fa0ceabed88b87fedf25ec849494991a956b9f2cbad33632c",
+        "licenses/holywu-vs-rife/LICENSE": "aea942caf766b16e6ef0b26e033fa92c0dea3124f6f7ad4a18ca1fb43e010d40"
+      },
+      "graph_audit": {
+        "checker": "passed",
+        "parameter_tensors_exact": 158,
+        "operator_counts": {
+          "Add": 75,
+          "Cast": 80,
+          "Concat": 86,
+          "Constant": 632,
+          "ConstantOfShape": 21,
+          "Conv": 56,
+          "ConvTranspose": 7,
+          "DepthToSpace": 5,
+          "Div": 64,
+          "Equal": 20,
+          "Expand": 21,
+          "Gather": 32,
+          "GridSample": 18,
+          "LeakyRelu": 56,
+          "Mul": 90,
+          "Range": 20,
+          "Reshape": 40,
+          "Resize": 14,
+          "Shape": 53,
+          "Sigmoid": 1,
+          "Slice": 46,
+          "Sub": 61,
+          "Tile": 1,
+          "Transpose": 10,
+          "Unsqueeze": 352,
+          "Where": 20
+        },
+        "grid_sample": {
+          "count": 18,
+          "mode": "bilinear",
+          "padding_mode": "border",
+          "align_corners": true
+        },
+        "all_stage_deconvolution_outputs": 52,
+        "custom_operators": [],
+        "input_clamp": false,
+        "input_output_shapes": {
+          "image0": [
+            1,
+            3,
+            "height",
+            "width"
+          ],
+          "image1": [
+            1,
+            3,
+            "height",
+            "width"
+          ],
+          "timestep": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "output": [
+            1,
+            3,
+            "height",
+            "width"
+          ]
+        }
+      },
+      "exporter": {
+        "api": "torch.onnx.export",
+        "dynamo": false,
+        "opset": 16,
+        "constant_folding": false,
+        "files": {
+          "__init__.py": "d794e04ae5a433c2ec393cdf639961ed47c008a0dfdc23fd2034fcb64213d156",
+          "assets.py": "6ce3e34fcf2a57ac6203127fee3ad2b2dc24c29a3e0db61fc4ee5887abe82faf",
+          "diagnose_reference.py": "97c4ccb6eee2bda98c67dec887595121ff4ff17d810222d3376e078b0114c928",
+          "export_reference.py": "0f20ea01de4d3861d7c5136d9bddd8b1b7b9135e28fe076114d14ce6ea32fcfa",
+          "reference.py": "a07548237eb41b9e82924c6332e5a736c824c45df6340ed0ff8c3742dac15c7d",
+          "upstream_oracle.py": "bd02bf9c9fd3b966898741a043e5f4407e20b6779ae5db3792a4a9aa9761dc03",
+          "verify_reference.py": "05278a5cee2c9d88687b9410f003b08f86af632af7bf31214ce3ebb868389e87"
+        }
+      },
+      "cpu_numerical_cases": 13,
+      "gpu_pytorch_cases": 6,
+      "release_alignment_status": "not_frozen_pending_real_content_review"
+    },
+    {
+      "id": "4.26",
+      "status": "reference_validated",
+      "artifact": {
+        "path": "build/reference/rife-4.26-reference-fp32.onnx",
+        "bytes": 22863763,
+        "sha256": "24ef5c67b56e598cc28d30f4aed5fd08daf351ce4e9e85d4e3827301147ebc82"
+      },
+      "export_metadata": "build/reference/rife-4.26-reference-fp32.export.json",
+      "contract": {
+        "images": "float32 [1, 3, H, W], RGB plane order, matching shapes",
+        "timestep": "float32 [1, 1, 1, 1], runtime scalar in [0, 1]",
+        "output": "float32 [1, 3, H, W], padded output; caller crops to source dimensions",
+        "spatial_axes": "dynamic H/W; aligned padded dimensions only, not arbitrary unpadded dimensions",
+        "minimum_structural_alignment": 64,
+        "official_preprocessing": "right/bottom zero padding to multiples of 128, then output crop",
+        "scales": [
+          16,
+          8,
+          4,
+          2,
+          1
+        ],
+        "scale": 1,
+        "additional_input_clamp": false,
+        "project_optimization_passes": []
+      },
+      "parameters": {
+        "checkpoint_sha256": "45c7f74156704769dc9f85cfcaf8552e1e926f9399dcfa3a553dee88fac6f53f",
+        "raw_tensor_count": 198,
+        "tensor_count": 158,
+        "parameter_elements": 5664776,
+        "stripped_ddp_prefix_count": 198,
+        "ignored_training_only": [
+          {
+            "key": "teacher.conv0.0.0.weight",
+            "shape": [
+              32,
+              31,
+              3,
+              3
+            ],
+            "sha256": "11e7b0149253e00de782f7459ad064ed359132a00ff8420a9f8518cedb9c4321"
+          },
+          {
+            "key": "teacher.conv0.0.0.bias",
+            "shape": [
+              32
+            ],
+            "sha256": "bebcac4f4ddfeb894ff1c8916fc60743f71f2bee864cceced92a5952b497968c"
+          },
+          {
+            "key": "teacher.conv0.1.0.weight",
+            "shape": [
+              64,
+              32,
+              3,
+              3
+            ],
+            "sha256": "fbab0295294cd6abc5ce3b9de8a4a1963715118997efda7e9cf4b7d0fcd10aac"
+          },
+          {
+            "key": "teacher.conv0.1.0.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "6838ebe1c812d6304fbb7fb15feaa1adb38d8b6b21cb4a5d23f934476d58c398"
+          },
+          {
+            "key": "teacher.lastconv.0.weight",
+            "shape": [
+              64,
+              52,
+              4,
+              4
+            ],
+            "sha256": "2c22b27013432afeef1eb515a45c3ab4d365028cf9b5da98d9c696acffc72ed8"
+          },
+          {
+            "key": "teacher.lastconv.0.bias",
+            "shape": [
+              52
+            ],
+            "sha256": "ba5f13bd5504a283389928f16d4c274760f5e6336b0f8c8f15d101d94fd07d7b"
+          },
+          {
+            "key": "teacher.convblock.0.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "cf5e9a4e395a9accd65716bb3a8df6d5ce491d5a27002ae1b7c117fe9ecc87ac"
+          },
+          {
+            "key": "teacher.convblock.0.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "9603277924e2055948b4fb7e855f99514525dfbcd2a56e7e1d04a96862c9f51f"
+          },
+          {
+            "key": "teacher.convblock.0.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "54c306e9a0dc5e5241d927f05654c9cd6c8a24f9e6e37533f9f1fc27b3a09e04"
+          },
+          {
+            "key": "teacher.convblock.1.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "13de9a69a5d6d23398a64133f57230b157129cab3b0fdcc74363dc57cd63f275"
+          },
+          {
+            "key": "teacher.convblock.1.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "0c03097f097b51cf8b8d47081d192928ca22270aca603b5fa2b05aa213bb0cc3"
+          },
+          {
+            "key": "teacher.convblock.1.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "2b188ba4ac0572cdf6b3d58a2dbeaca05e0dc684f76ab611b1c0e7e5f1f0ab74"
+          },
+          {
+            "key": "teacher.convblock.2.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "14b2d63d4cd712ea79c2c15e1fff131612a00151b06daae6e212d4a22c5b878f"
+          },
+          {
+            "key": "teacher.convblock.2.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "f778d9f3f80fad36aee8b872fd43fcc81a07634845d20db07b2c42fd3c53462f"
+          },
+          {
+            "key": "teacher.convblock.2.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "a9b4804accadbe414a93f7f13df93868271ededcdfea19a5a03e5430740e75a5"
+          },
+          {
+            "key": "teacher.convblock.3.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "ed784e00d94bba51cb2988236aec8ba7b72940dc889164aa87cadd3aedd57e7b"
+          },
+          {
+            "key": "teacher.convblock.3.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "f740b33d87b70ce1cc20a8d000ed0c1d4f76c41cde4ccf1e9625d7bded41351e"
+          },
+          {
+            "key": "teacher.convblock.3.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "e3a0ef0b4e5b889d2f7788a8a883e94e1ef001ab884c7feaefa4a05e03db49d3"
+          },
+          {
+            "key": "teacher.convblock.4.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "96b56b2800c4247c35d44d8d9ea4d4e98fe1a6a664e0fe294040f29dbd7fad05"
+          },
+          {
+            "key": "teacher.convblock.4.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "e7d2f25106ad89eeaaf8ecdec1fdc2827108cd2cfde0a3bd14b4ad4d2ab71fed"
+          },
+          {
+            "key": "teacher.convblock.4.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "c4dfd1b492814b8f0a7a637e728133f1aab5d4a24287cf7e65b0f347c653d0d8"
+          },
+          {
+            "key": "teacher.convblock.5.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "3c1e3164bb38850df09b85ec9bcf6f4596ea85ed0f46c5224424c9b7372e18ab"
+          },
+          {
+            "key": "teacher.convblock.5.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "314a6437c099a9fe5c05ba0b027ef894f343e4a009fb97fc376c00cdb42877c0"
+          },
+          {
+            "key": "teacher.convblock.5.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "4f719f91f611c811f7a0a543b09d23af7e46dd02892d75a5b5c2734855c7a86a"
+          },
+          {
+            "key": "teacher.convblock.6.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "53de8fcf3740d8fc9f11750cb16a3f1cca3a1a6e745958f5909110aee9113136"
+          },
+          {
+            "key": "teacher.convblock.6.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "0e60abbb19b5c985587bf7c100b942ed139bd15b57db43b03d85b79f6a26ace2"
+          },
+          {
+            "key": "teacher.convblock.6.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "25a217d468664d009241bdcd249995cd9bd3c036df151c711d5f451c84218170"
+          },
+          {
+            "key": "teacher.convblock.7.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "119657e6157a46a952cce36ab5677405bce8123d38c60601d5858cf4db3624e2"
+          },
+          {
+            "key": "teacher.convblock.7.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "3bcccf0f3433a25c7dc0de3bd0a95bd8a7bbc528d3bfb83daa010bbf14e76bf4"
+          },
+          {
+            "key": "teacher.convblock.7.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "1eb46e631dd9078a2fb8c59971ace0b03ec43292169e1104557fa80a116f25a0"
+          },
+          {
+            "key": "caltime.0.weight",
+            "shape": [
+              32,
+              17,
+              3,
+              3
+            ],
+            "sha256": "dd66ec1d8f45ace108c6e3745e29866258943d17cffc7302d434e704981cf065"
+          },
+          {
+            "key": "caltime.0.bias",
+            "shape": [
+              32
+            ],
+            "sha256": "cc050617586483ae756952094ed6df4056a7c41b2cd7eef37bd5b364cd5e5934"
+          },
+          {
+            "key": "caltime.2.weight",
+            "shape": [
+              64,
+              32,
+              3,
+              3
+            ],
+            "sha256": "ce615c8afa5a62db319c1bbbe3ac1de1da4be5e363e4618585e86b473ef69251"
+          },
+          {
+            "key": "caltime.2.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "035afa110cd7e2237473de645a7c133dba32bb9fe9ee1930e76d8f178deb68bc"
+          },
+          {
+            "key": "caltime.4.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "c2134a7698e191df293230d01eba146aa935af3b4ce8b2ba7e7af60eff8e10a1"
+          },
+          {
+            "key": "caltime.4.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "421c8f6cefad07343cd215c5cba6b5ad342a350e8119a3586a041644337aa700"
+          },
+          {
+            "key": "caltime.6.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "16306f2204ff8a7aee6c24da7b5ab55ee709a765d295e7c898850a02ad60fbad"
+          },
+          {
+            "key": "caltime.6.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "dcac55e12e41533233656f52faf9574968086ef214a9523d9eb117c99d48fa88"
+          },
+          {
+            "key": "caltime.8.weight",
+            "shape": [
+              1,
+              64,
+              3,
+              3
+            ],
+            "sha256": "3e66a14a7cd087f576af6853fa809c293e480a26f414d18ca7c31e6adbab9804"
+          },
+          {
+            "key": "caltime.8.bias",
+            "shape": [
+              1
+            ],
+            "sha256": "ec6697b18182fc424a3b111c4fab6709338b472c0d0ee5b0defefe2e7237cc1c"
+          }
+        ],
+        "training_schema_note": "Exact teacher/caltime keys and shapes audited from pinned checkpoints; the upstream inactive caltime comment has stale shapes.",
+        "strict": true
+      },
+      "verified_source_assets": {
+        "assets/upstream/4.26/original.zip": "c2452dd2b244947d4be580156bbead60d6b72af5736860f7d6b3f99648c9c4cc",
+        "assets/upstream/4.26/checkpoint/flownet.pkl": "45c7f74156704769dc9f85cfcaf8552e1e926f9399dcfa3a553dee88fac6f53f",
+        "assets/upstream/4.26/source/IFNet_HDv3.py": "655b4c772b037967b86c2dd31c8fa3b5323b79dd9a0e0088708d89149bbc8a32",
+        "assets/upstream/4.26/source/refine.py": "0c5698b4a05b9f6ab551740575c1c35e248e5b1829bab6445186081ebe15f032",
+        "assets/upstream/4.26/source/RIFE_HDv3.py": "81bbd0648e499de79e44768d284005d9d57d0f6eb7c30adae407f22675055730",
+        "licenses/practical-rife/LICENSE": "7932fb49341512b959b1744a6d9cbb39e5a1ec89da438a34d0454d5d8df9fecd",
+        "licenses/practical-rife/README.upstream.md": "1680a353055121d7e58834ed956f2b3aa9b4e4d5f52a3725ec0b5a62b1332132",
+        "assets/reference/practical-rife/inference_video.upstream.py": "72070ee3a8f0f6878179c41a754748440e3dbf1614d3c923ef52f3030f68854c",
+        "assets/reference/practical-rife/warplayer.upstream.py": "eed94da2f2e8056fa0ceabed88b87fedf25ec849494991a956b9f2cbad33632c",
+        "licenses/holywu-vs-rife/LICENSE": "aea942caf766b16e6ef0b26e033fa92c0dea3124f6f7ad4a18ca1fb43e010d40"
+      },
+      "graph_audit": {
+        "checker": "passed",
+        "parameter_tensors_exact": 158,
+        "operator_counts": {
+          "Add": 75,
+          "Cast": 80,
+          "Concat": 86,
+          "Constant": 632,
+          "ConstantOfShape": 21,
+          "Conv": 56,
+          "ConvTranspose": 7,
+          "DepthToSpace": 5,
+          "Div": 64,
+          "Equal": 20,
+          "Expand": 21,
+          "Gather": 32,
+          "GridSample": 18,
+          "LeakyRelu": 56,
+          "Mul": 90,
+          "Range": 20,
+          "Reshape": 40,
+          "Resize": 14,
+          "Shape": 53,
+          "Sigmoid": 1,
+          "Slice": 46,
+          "Sub": 61,
+          "Tile": 1,
+          "Transpose": 10,
+          "Unsqueeze": 352,
+          "Where": 20
+        },
+        "grid_sample": {
+          "count": 18,
+          "mode": "bilinear",
+          "padding_mode": "border",
+          "align_corners": true
+        },
+        "all_stage_deconvolution_outputs": 52,
+        "custom_operators": [],
+        "input_clamp": false,
+        "input_output_shapes": {
+          "image0": [
+            1,
+            3,
+            "height",
+            "width"
+          ],
+          "image1": [
+            1,
+            3,
+            "height",
+            "width"
+          ],
+          "timestep": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "output": [
+            1,
+            3,
+            "height",
+            "width"
+          ]
+        }
+      },
+      "exporter": {
+        "api": "torch.onnx.export",
+        "dynamo": false,
+        "opset": 16,
+        "constant_folding": false,
+        "files": {
+          "__init__.py": "d794e04ae5a433c2ec393cdf639961ed47c008a0dfdc23fd2034fcb64213d156",
+          "assets.py": "6ce3e34fcf2a57ac6203127fee3ad2b2dc24c29a3e0db61fc4ee5887abe82faf",
+          "diagnose_reference.py": "97c4ccb6eee2bda98c67dec887595121ff4ff17d810222d3376e078b0114c928",
+          "export_reference.py": "0f20ea01de4d3861d7c5136d9bddd8b1b7b9135e28fe076114d14ce6ea32fcfa",
+          "reference.py": "a07548237eb41b9e82924c6332e5a736c824c45df6340ed0ff8c3742dac15c7d",
+          "upstream_oracle.py": "bd02bf9c9fd3b966898741a043e5f4407e20b6779ae5db3792a4a9aa9761dc03",
+          "verify_reference.py": "05278a5cee2c9d88687b9410f003b08f86af632af7bf31214ce3ebb868389e87"
+        }
+      },
+      "cpu_numerical_cases": 13,
+      "gpu_pytorch_cases": 6,
+      "release_alignment_status": "not_frozen_pending_real_content_review"
+    },
+    {
+      "id": "4.26-large",
+      "status": "reference_validated",
+      "artifact": {
+        "path": "build/reference/rife-4.26-large-reference-fp32.onnx",
+        "bytes": 23097293,
+        "sha256": "96bcdd6f9e1af3ac19ce87104f48590a8c8d423ba1f58df7c99d300e40aa501c"
+      },
+      "export_metadata": "build/reference/rife-4.26-large-reference-fp32.export.json",
+      "contract": {
+        "images": "float32 [1, 3, H, W], RGB plane order, matching shapes",
+        "timestep": "float32 [1, 1, 1, 1], runtime scalar in [0, 1]",
+        "output": "float32 [1, 3, H, W], padded output; caller crops to source dimensions",
+        "spatial_axes": "dynamic H/W; aligned padded dimensions only, not arbitrary unpadded dimensions",
+        "minimum_structural_alignment": 64,
+        "official_preprocessing": "right/bottom zero padding to multiples of 128, then output crop",
+        "scales": [
+          16,
+          8,
+          4,
+          2,
+          1
+        ],
+        "scale": 1,
+        "additional_input_clamp": false,
+        "project_optimization_passes": []
+      },
+      "parameters": {
+        "checkpoint_sha256": "4cc518e172156ad6207b9c7a43364f518832d83a4325d484240493a9e2980537",
+        "raw_tensor_count": 198,
+        "tensor_count": 158,
+        "parameter_elements": 5723156,
+        "stripped_ddp_prefix_count": 198,
+        "ignored_training_only": [
+          {
+            "key": "teacher.conv0.0.0.weight",
+            "shape": [
+              32,
+              55,
+              3,
+              3
+            ],
+            "sha256": "242acb084f18e9f99e81eef1d518576f5266c74fba1e574ffd4ffeb8e3bc9729"
+          },
+          {
+            "key": "teacher.conv0.0.0.bias",
+            "shape": [
+              32
+            ],
+            "sha256": "a68101bb9d08dd9baa0441c5f4a006a897dd404998c8a229af2e138a5368e87c"
+          },
+          {
+            "key": "teacher.conv0.1.0.weight",
+            "shape": [
+              64,
+              32,
+              3,
+              3
+            ],
+            "sha256": "ec6577d38db7686306821b8c173d2162c5bc66c9fb315a981e937b1ab113d43e"
+          },
+          {
+            "key": "teacher.conv0.1.0.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "60e2a435139be5244bb388ef1273089e99281de644670c3462ef524cf9204145"
+          },
+          {
+            "key": "teacher.lastconv.0.weight",
+            "shape": [
+              64,
+              52,
+              4,
+              4
+            ],
+            "sha256": "2f2b110b7eb995034ef2c556cae2caee3f23a6f5f03be18cf3ee9f58656ae600"
+          },
+          {
+            "key": "teacher.lastconv.0.bias",
+            "shape": [
+              52
+            ],
+            "sha256": "cb74752e2bbf2d5e8eb4e0ba29e4fe5402ed66ad2ed905130627e9bda0a85c24"
+          },
+          {
+            "key": "teacher.convblock.0.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "c43289eaaacda19a3d0ca48da8807dc5075072f3e1aa5657637a24d9aa91498d"
+          },
+          {
+            "key": "teacher.convblock.0.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "aee3111dd1ce0399ba97b50856b05a74aeab7516b69c334fa0c563376147bb0f"
+          },
+          {
+            "key": "teacher.convblock.0.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "b5e459bb1f93700262d0832c912b7c373efeb2151eb41b9b2f26a02adc55ac62"
+          },
+          {
+            "key": "teacher.convblock.1.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "bc3199e62bab93e3fc652bd29072fef574bbda65d7df72d613e246f0a076a926"
+          },
+          {
+            "key": "teacher.convblock.1.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "9991fd9e130de70d357099c5b2c7b3af9d8aae3e9af5f5859fd568eaabae0649"
+          },
+          {
+            "key": "teacher.convblock.1.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "949687138322a4cf6e0e8fce078c1813b7c8cd903509764bcffa15e36fc922ba"
+          },
+          {
+            "key": "teacher.convblock.2.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "a98c04f3ef20667be78f84532480c92dadae524eabb358e5c853d986e4fcc2a8"
+          },
+          {
+            "key": "teacher.convblock.2.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "ea99379f8ca5a8ad9585a21269608de7ab322a14b441bb1b675826dd39c22181"
+          },
+          {
+            "key": "teacher.convblock.2.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "bbabad80323648fb9b70a4a424cf3fbea16a514b3baa20ae001f86a0cd694717"
+          },
+          {
+            "key": "teacher.convblock.3.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "d2818b0e749f90d91c61565bc7e05d2bfaf14c2cc7454977d0fb745e9ab967d9"
+          },
+          {
+            "key": "teacher.convblock.3.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "e29fb129d9f744fc43652114e110e5e4d37ea89c242bf2f45521145e725db2f2"
+          },
+          {
+            "key": "teacher.convblock.3.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "d98b966f0fc63d5c47d552fe2cb73ccdf07de01f693ec4fecfb1ae5f8f0606c9"
+          },
+          {
+            "key": "teacher.convblock.4.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "c94d76430a620c1d1d88b70f3dcaa352107be0e4a68e4c2031d64346e295bb57"
+          },
+          {
+            "key": "teacher.convblock.4.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "628a14e2fd45b18f0fb947959fc2a9012943c1ed30adab5aff44c6c92ae8d04f"
+          },
+          {
+            "key": "teacher.convblock.4.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "aa593ff8f0f871eb5701915e2b60f9420722d2076f691fc57c76820ea1d70ae7"
+          },
+          {
+            "key": "teacher.convblock.5.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "b63f6b222a0f522678e685e86180679f7c440a50715d637bcb92f5668f5e36d9"
+          },
+          {
+            "key": "teacher.convblock.5.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "a9df167b6264f0f0e242deb374e00931abb82a55163a218ade52ffb9f1668e8b"
+          },
+          {
+            "key": "teacher.convblock.5.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "7b60149ef152cb7bfb692f3860b61df3d55bfcdb285c99fc21412a972f964185"
+          },
+          {
+            "key": "teacher.convblock.6.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "b3240ac40857a5a5e0c4c9acc28e4281073a3dd3b949c0c71e2f20e45ccefe6e"
+          },
+          {
+            "key": "teacher.convblock.6.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "0164db775a634d2386cff64e78b36356504f8d76203337f958ff64c086107ea6"
+          },
+          {
+            "key": "teacher.convblock.6.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "470a01db0f274bdec7a11e836db0ae81983e8a13454c3844a2556fa477530df0"
+          },
+          {
+            "key": "teacher.convblock.7.beta",
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "sha256": "0d37ed8be3749a1f39477ce28e9a29d689849fbb812453a4458e5de0f56f3e04"
+          },
+          {
+            "key": "teacher.convblock.7.conv.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "fa0062530c5eb4594502cea829a68305de7a708c656a643d9c653de0e1ff760b"
+          },
+          {
+            "key": "teacher.convblock.7.conv.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "8be5454421c1cc67129dcf2911c04f7d342e9bcbc504a4669a65e0a8f22b128f"
+          },
+          {
+            "key": "caltime.0.weight",
+            "shape": [
+              32,
+              41,
+              3,
+              3
+            ],
+            "sha256": "283ce74a4d2416671f38daa0b352523cc77f17c3f962a5e281cadf4ce6fa2d7a"
+          },
+          {
+            "key": "caltime.0.bias",
+            "shape": [
+              32
+            ],
+            "sha256": "ea165af347e9dcb1e6463ade518e7c7101abcd3cd2184ea4df4591b495c16637"
+          },
+          {
+            "key": "caltime.2.weight",
+            "shape": [
+              64,
+              32,
+              3,
+              3
+            ],
+            "sha256": "e5ee92ddb24be63c2794e36645e047b43b309e0b4513a6870b043044b0cdbf0f"
+          },
+          {
+            "key": "caltime.2.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "2dcb11e9717ef4426789e57862df239ce4b38599b629f2fd76df8aba5bc4a52c"
+          },
+          {
+            "key": "caltime.4.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "fdf410bb348fe72a135d7a9ee312346bd39ec112198b51bb3767635ae91f343d"
+          },
+          {
+            "key": "caltime.4.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "4c382db83ff1b60d3ff1e6c4839d23f311934b82cbe8402c97546ab7f79ee115"
+          },
+          {
+            "key": "caltime.6.weight",
+            "shape": [
+              64,
+              64,
+              3,
+              3
+            ],
+            "sha256": "01d8ad4d37bcff3968f3496a30657ba03ce1c04735ccb46221594b1467d1d646"
+          },
+          {
+            "key": "caltime.6.bias",
+            "shape": [
+              64
+            ],
+            "sha256": "2ce484437d689a146868c5bf39f50c7dca4ed337a84c9ed32c42c047f6783d41"
+          },
+          {
+            "key": "caltime.8.weight",
+            "shape": [
+              1,
+              64,
+              3,
+              3
+            ],
+            "sha256": "f69e5c1d937ebcc6dcc595472528e034764f415a8594498bf128be9500e2f93f"
+          },
+          {
+            "key": "caltime.8.bias",
+            "shape": [
+              1
+            ],
+            "sha256": "d5f8b66c8a5ea7864779d12137bb6b794adc388c2475badf451959e4e2e02f03"
+          }
+        ],
+        "training_schema_note": "Exact teacher/caltime keys and shapes audited from pinned checkpoints; the upstream inactive caltime comment has stale shapes.",
+        "strict": true
+      },
+      "verified_source_assets": {
+        "assets/upstream/4.26-large/original.zip": "93c0ec3dce359930059c1cc6733cff1d0c075314e30d352864436023bfc13463",
+        "assets/upstream/4.26-large/checkpoint/flownet.pkl": "4cc518e172156ad6207b9c7a43364f518832d83a4325d484240493a9e2980537",
+        "assets/upstream/4.26-large/source/IFNet_HDv3.py": "c777e5db792914c7a5fb0d254607b79f13d43c409e59cb4fe6ba55153313ec64",
+        "assets/upstream/4.26-large/source/refine.py": "0c5698b4a05b9f6ab551740575c1c35e248e5b1829bab6445186081ebe15f032",
+        "assets/upstream/4.26-large/source/RIFE_HDv3.py": "81bbd0648e499de79e44768d284005d9d57d0f6eb7c30adae407f22675055730",
+        "licenses/practical-rife/LICENSE": "7932fb49341512b959b1744a6d9cbb39e5a1ec89da438a34d0454d5d8df9fecd",
+        "licenses/practical-rife/README.upstream.md": "1680a353055121d7e58834ed956f2b3aa9b4e4d5f52a3725ec0b5a62b1332132",
+        "assets/reference/practical-rife/inference_video.upstream.py": "72070ee3a8f0f6878179c41a754748440e3dbf1614d3c923ef52f3030f68854c",
+        "assets/reference/practical-rife/warplayer.upstream.py": "eed94da2f2e8056fa0ceabed88b87fedf25ec849494991a956b9f2cbad33632c",
+        "licenses/holywu-vs-rife/LICENSE": "aea942caf766b16e6ef0b26e033fa92c0dea3124f6f7ad4a18ca1fb43e010d40"
+      },
+      "graph_audit": {
+        "checker": "passed",
+        "parameter_tensors_exact": 158,
+        "operator_counts": {
+          "Add": 75,
+          "Cast": 80,
+          "Concat": 86,
+          "Constant": 632,
+          "ConstantOfShape": 21,
+          "Conv": 56,
+          "ConvTranspose": 7,
+          "DepthToSpace": 5,
+          "Div": 64,
+          "Equal": 20,
+          "Expand": 21,
+          "Gather": 32,
+          "GridSample": 18,
+          "LeakyRelu": 56,
+          "Mul": 90,
+          "Range": 20,
+          "Reshape": 40,
+          "Resize": 14,
+          "Shape": 53,
+          "Sigmoid": 1,
+          "Slice": 46,
+          "Sub": 61,
+          "Tile": 1,
+          "Transpose": 10,
+          "Unsqueeze": 352,
+          "Where": 20
+        },
+        "grid_sample": {
+          "count": 18,
+          "mode": "bilinear",
+          "padding_mode": "border",
+          "align_corners": true
+        },
+        "all_stage_deconvolution_outputs": 52,
+        "custom_operators": [],
+        "input_clamp": false,
+        "input_output_shapes": {
+          "image0": [
+            1,
+            3,
+            "height",
+            "width"
+          ],
+          "image1": [
+            1,
+            3,
+            "height",
+            "width"
+          ],
+          "timestep": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "output": [
+            1,
+            3,
+            "height",
+            "width"
+          ]
+        }
+      },
+      "exporter": {
+        "api": "torch.onnx.export",
+        "dynamo": false,
+        "opset": 16,
+        "constant_folding": false,
+        "files": {
+          "__init__.py": "d794e04ae5a433c2ec393cdf639961ed47c008a0dfdc23fd2034fcb64213d156",
+          "assets.py": "6ce3e34fcf2a57ac6203127fee3ad2b2dc24c29a3e0db61fc4ee5887abe82faf",
+          "diagnose_reference.py": "97c4ccb6eee2bda98c67dec887595121ff4ff17d810222d3376e078b0114c928",
+          "export_reference.py": "0f20ea01de4d3861d7c5136d9bddd8b1b7b9135e28fe076114d14ce6ea32fcfa",
+          "reference.py": "a07548237eb41b9e82924c6332e5a736c824c45df6340ed0ff8c3742dac15c7d",
+          "upstream_oracle.py": "bd02bf9c9fd3b966898741a043e5f4407e20b6779ae5db3792a4a9aa9761dc03",
+          "verify_reference.py": "05278a5cee2c9d88687b9410f003b08f86af632af7bf31214ce3ebb868389e87"
+        }
+      },
+      "cpu_numerical_cases": 13,
+      "gpu_pytorch_cases": 6,
+      "release_alignment_status": "not_frozen_pending_real_content_review"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/evidence/m1-reference-validation.json",
+      "sha256": "1f2b8258cc9539aedbdcba06340c9633d64fb9bb244796ab35bdfb107e75bf4e"
+    },
+    {
+      "path": "docs/evidence/m1-numerical-diagnostics.json",
+      "sha256": "e9a8bd5ffca49cd0b1a91c8f8cb967ab9987bb9d5f563f9fbdad3b4b12a6f61f"
+    },
+    {
+      "path": "docs/evidence/m1-unit-tests.json",
+      "sha256": "b5cff30c74ac99d7a94c47bfb448feb5d39a6841d32a1491d82ca983a8810fdf"
+    },
+    {
+      "path": "tools/export/requirements.lock.txt",
+      "sha256": "ef4eeb32a5422c920d3aa10e02fbe483f3ab965027d8b2b6ea964e6a35a7ed76"
+    }
+  ],
+  "checks": {
+    "cpu_numerical_cases": 52,
+    "gpu_pytorch_cases": 24,
+    "contract_tests": 9
+  },
+  "production_graph_optimizations": [],
+  "tensorrt_status": "not_started",
+  "release_alignment": "Official reference remains 128; candidate structures pass, real-content quality remains pending."
+}

@@ -1,0 +1,6 @@
+# Development-only dependencies; not playback dependencies.
+# Install the PyTorch CUDA build separately using the documented cu130 index.
+torch==2.14.1
+numpy==2.5.4
+onnx==1.23.2
+onnxruntime==1.31.1

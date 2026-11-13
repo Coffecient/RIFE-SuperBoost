@@ -1,0 +1,13 @@
+RIFE-SuperBoost project source is licensed under MIT.
+
+The native DLL and builder statically link the NVIDIA CUDA 13.2 runtime and
+Microsoft Visual C++ runtime. Those components do not acquire the MIT license.
+LicenseRef-NVIDIA-CUDA in wheel metadata refers to CUDA-EULA.txt and
+CUDA-LICENSE.txt in this directory. CUDA's supplement lists cudart_static.lib
+as distributable subject to its distribution conditions. Microsoft runtime
+redistribution remains governed by the applicable Visual Studio license.
+
+TensorRT DLLs are not included in this distribution. They are supplied by
+NVIDIA's separately licensed tensorrt-cu13-libs==10.16.1.11 distribution.
+Its license is retained in that distribution's .dist-info/LICENSE.txt.
+Do not relicense or redistribute a standalone NVIDIA runtime under MIT.
