@@ -16,4 +16,4 @@ Requires the core, a working VapourSynth environment, and a separately installed
 backend. Official right/bottom zero padding uses alignment 128; no added clamp
 or color conversion. FP16 perceptual equivalence is not claimed.
 
-This is local development version `0.1.0.dev8`, not a PyPI publication.
+This is local development version `0.1.0.dev9`, not a PyPI publication.

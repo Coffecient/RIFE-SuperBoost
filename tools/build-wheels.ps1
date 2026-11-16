@@ -10,7 +10,7 @@ $taskPython = (Resolve-Path -LiteralPath $Python).Path
 $taskDist = Join-Path $taskRoot 'dist'
 $taskLogs = Join-Path $taskRoot 'build'
 New-Item -ItemType Directory -Path $taskDist, $taskLogs -Force | Out-Null
-foreach ($taskPackage in @('core', 'backend-tensorrt', 'models/4.25', 'models/4.25-lite', 'models/4.26', 'models/4.26-large')) {
+foreach ($taskPackage in @('core', 'backend-tensorrt', 'models/4.25', 'models/4.25-lite', 'models/4.26', 'models/4.26-large', 'models/4.25-scale8', 'models/4.26-scale8')) {
     $taskLog = Join-Path $taskLogs ('wheel-' + $taskPackage.Replace('/', '-') + '.log')
     & $taskPython -m build --sdist --wheel --no-isolation --outdir $taskDist (Join-Path $taskRoot "packages/$taskPackage") *> $taskLog
     if ($LASTEXITCODE -ne 0) { throw "PEP 517 build failed for $taskPackage; see $taskLog." }

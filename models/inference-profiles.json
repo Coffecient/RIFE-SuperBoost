@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "profiles": [
+    {
+      "id": "4.25-scale8",
+      "base_model": "4.25",
+      "stage_scale_denominators": [8, 8, 4, 2, 1],
+      "alignment": 128,
+      "padding": "right-bottom-zero",
+      "geometry": "fp32",
+      "weights": "unchanged"
+    },
+    {
+      "id": "4.26-scale8",
+      "base_model": "4.26",
+      "stage_scale_denominators": [8, 8, 4, 2, 1],
+      "alignment": 128,
+      "padding": "right-bottom-zero",
+      "geometry": "fp32",
+      "weights": "unchanged"
+    }
+  ]
+}

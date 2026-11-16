@@ -252,7 +252,8 @@ def resolve_model(value: str | Model) -> Model:
         return value
     matches = list(entry_points(group="rife_superboost.models", name=value))
     if len(matches) != 1:
-        packages = {"4.25": "model-425", "4.25-lite": "model-425-lite", "4.26": "model-426", "4.26-large": "model-426-large"}
+        packages = {"4.25": "model-425", "4.25-lite": "model-425-lite", "4.26": "model-426", "4.26-large": "model-426-large",
+                    "4.25-scale8": "model-425-scale8", "4.26-scale8": "model-426-scale8"}
         hint = f" Install RIFE-SuperBoost[{packages[value]}]." if value in packages else " Install its model package."
         raise ModelNotInstalledError(f"Model {value!r} is not uniquely installed.{hint} Or pass Model.from_file(...).")
     model = matches[0].load()()

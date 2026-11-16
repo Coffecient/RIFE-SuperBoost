@@ -6,5 +6,5 @@ from .color import convert_color
 from .models import Model
 from .errors import RifeError
 
-__version__ = "0.1.0.dev8"
+__version__ = "0.1.0.dev9"
 __all__ = ["Model", "RifeError", "capabilities", "convert_color", "interpolate"]

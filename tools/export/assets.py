@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import hashlib
+from copy import deepcopy
 import json
 from pathlib import Path
 from typing import Any
@@ -33,6 +34,32 @@ def sha256(path: Path) -> str:
 def read_models() -> dict[str, dict[str, Any]]:
     """Read the checked-in model identities; no network access is performed."""
     return {item["id"]: item for item in json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]}
+
+
+def read_prepared_models() -> dict[str, dict[str, Any]]:
+    """Resolve prepared inference profiles without changing upstream metadata.
+
+    Scale8 profiles reuse the strictly verified checkpoint and architecture of
+    their base model. Their IDs and explicit profile metadata travel into every
+    exported graph and descriptor, keeping inference behavior/cache identities
+    separate from the upstream defaults.
+    """
+    models = read_models()
+    data = json.loads((MODELS / "inference-profiles.json").read_text(encoding="utf-8"))
+    if data["schema_version"] != 1:
+        raise ValueError("Unsupported inference profile schema")
+    for profile in data["profiles"]:
+        model_id, base_id = profile["id"], profile["base_model"]
+        if (base_id not in ("4.25", "4.26") or model_id != base_id + "-scale8" or model_id in models
+                or profile["stage_scale_denominators"] != [8, 8, 4, 2, 1]
+                or profile["alignment"] != 128 or profile["padding"] != "right-bottom-zero"
+                or profile["geometry"] != "fp32" or profile["weights"] != "unchanged"):
+            raise ValueError(f"Invalid prepared inference profile: {model_id}")
+        model = deepcopy(models[base_id])
+        model.update(id=model_id, base_model=base_id, inference_profile=deepcopy(profile))
+        model["reference_profile"]["stage_scale_denominators"] = list(profile["stage_scale_denominators"])
+        models[model_id] = model
+    return models
 
 
 def verify_file(record: dict[str, Any]) -> Path:

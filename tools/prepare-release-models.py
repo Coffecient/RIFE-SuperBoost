@@ -16,7 +16,8 @@ from onnx.external_data_helper import set_external_data
 import onnxruntime as ort
 
 ROOT = Path(__file__).resolve().parents[1]
-MODELS = {"4.25": "425", "4.25-lite": "425_lite", "4.26": "426", "4.26-large": "426_large"}
+MODELS = {"4.25": "425", "4.25-lite": "425_lite", "4.26": "426", "4.26-large": "426_large",
+          "4.25-scale8": "425_scale8", "4.26-scale8": "426_scale8"}
 RELEASE_VERSION = tomllib.loads((ROOT / "packages/core/pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
 CAST_PREFIX = "rsb_shared_weight_cast_"
 
@@ -109,6 +110,8 @@ def prepare(model_id: str, suffix: str, upstream: dict) -> dict:
     fused_record = json.loads((fused_folder / "variants.json").read_text(encoding="utf-8"))
     if fused_record["checkpoint_sha256"] != upstream["checkpoint"]["sha256"]:
         raise ValueError("Fusion assets must derive from the exact official checkpoint")
+    if fused_record["scales"] != descriptor["scales"] or fused_record["model_id"] != model_id:
+        raise ValueError("Portable and TensorRT graphs must use the same inference profile")
     descriptor["backend_variants"] = deepcopy(fused_record["variants"])
     entries.extend((entry["precision"], entry, fused_folder) for entry in descriptor["backend_variants"].values())
     weight_path = target / "weights.bin"
@@ -165,6 +168,8 @@ def prepare(model_id: str, suffix: str, upstream: dict) -> dict:
                   "packaging": "Split only; shared FP32 external weights; explicit constant Casts in prepared FP16 graphs",
                   "graphs": graphs, "external_data": descriptor["external_data"],
                   "generator_sha256": digest(Path(__file__)), "license": "MIT; Copyright (c) 2021 hzwer"}
+    if "inference_profile" in descriptor:
+        provenance["inference_profile"] = descriptor["inference_profile"]
 
     options = ort.SessionOptions()
     options.intra_op_num_threads = 4
@@ -224,8 +229,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--models", nargs="+", choices=list(MODELS), default=list(MODELS), help="Prepared official models to package.")
     args = parser.parse_args()
-    records = [prepare(model_id, MODELS[model_id], upstream[model_id]) for model_id in args.models]
-    write_json(ROOT / "models/distribution-manifest.json", {"schema_version": 2, "version": RELEASE_VERSION, "revision": "m3-completion-v1", "models": records})
+    profiles = {p["id"]: p for p in json.loads((ROOT / "models/inference-profiles.json").read_text(encoding="utf-8"))["profiles"]}
+    records = [prepare(model_id, MODELS[model_id], upstream[profiles[model_id]["base_model"] if model_id in profiles else model_id])
+               for model_id in args.models]
+    manifest_path = ROOT / "models/distribution-manifest.json"
+    existing = {r["id"]: r for r in json.loads(manifest_path.read_text(encoding="utf-8"))["models"]} if manifest_path.exists() else {}
+    existing.update({r["id"]: r for r in records})
+    write_json(manifest_path, {"schema_version": 2, "version": RELEASE_VERSION, "revision": "m3-completion-v1",
+                              "models": [existing[key] for key in MODELS if key in existing]})
 
 
 if __name__ == "__main__":

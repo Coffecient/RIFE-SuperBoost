@@ -16,7 +16,7 @@ import torch
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/export"))
-from assets import build_reference, read_models, sha256, write_json
+from assets import build_reference, read_prepared_models as read_models, sha256, write_json
 from export_reference import environment
 from network import Optimized, Passes
 
@@ -30,10 +30,11 @@ def export(model_id: str, output: Path, passes: Passes) -> dict:
         passes: Explicit graph transforms recorded in every asset's metadata.
     """
     model = read_models()[model_id]
-    reference_path = ROOT / f"build/reference/rife-{model_id}-reference-fp32.onnx"
+    base_id = model.get("base_model", model_id)
+    reference_path = ROOT / f"build/reference/rife-{base_id}-reference-fp32.onnx"
     references = json.loads((ROOT / "models/reference-manifest.json").read_text(encoding="utf-8"))
     # Verify M1 identity before deriving assets from its exact network parameters.
-    recorded = next(item for item in references["models"] if item["id"] == model_id)
+    recorded = next(item for item in references["models"] if item["id"] == base_id)
     if sha256(reference_path) != recorded["artifact"]["sha256"]:
         raise ValueError("M1 reference graph changed")
     reference, parameters = build_reference(model)
@@ -71,6 +72,8 @@ def export(model_id: str, output: Path, passes: Passes) -> dict:
                   "contract": VERSION, "precision": "fp32", "spatial": "dynamic-aligned-hw",
                   "scales": model["reference_profile"]["stage_scale_denominators"],
                   "passes": asdict(passes), "reference_sha256": sha256(reference_path)}
+    if "inference_profile" in model:
+        descriptor.update(base_model=base_id, inference_profile=model["inference_profile"])
     provenance = {"official_source": model["official_source"], "archive_sha256": model["archive"]["sha256"],
                   "checkpoint_sha256": model["checkpoint"]["sha256"], "source_files": model["source_files"],
                   "license": "MIT", "copyright": "Copyright (c) 2021 hzwer",

@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rife-superboost-model-426"
-version = "0.1.0.dev8"
+version = "0.1.0.dev9"
 description = "Pre-generated official RIFE 4.26 optimized precision bundle"
 requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE", "LICENSE.Practical-RIFE"]
 readme = "README.md"
-dependencies = ["RIFE-SuperBoost==0.1.0.dev8"]
+dependencies = ["RIFE-SuperBoost==0.1.0.dev9"]
 
 [project.entry-points."rife_superboost.models"]
 "4.26" = "rife_superboost_model_426:get_model"

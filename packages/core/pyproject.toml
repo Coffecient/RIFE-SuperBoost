@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "RIFE-SuperBoost"
-version = "0.1.0.dev8"
+version = "0.1.0.dev9"
 description = "VapourSynth RIFE interpolation with optional inference backends"
 requires-python = ">=3.10"
 license = "MIT"
@@ -12,11 +12,13 @@ readme = "README.md"
 dependencies = ["VapourSynth>=72"]
 
 [project.optional-dependencies]
-tensorrt = ["rife-superboost-tensorrt==0.1.0.dev8"]
-model-425 = ["rife-superboost-model-425==0.1.0.dev8"]
-model-425-lite = ["rife-superboost-model-425-lite==0.1.0.dev8"]
-model-426 = ["rife-superboost-model-426==0.1.0.dev8"]
-model-426-large = ["rife-superboost-model-426-large==0.1.0.dev8"]
+tensorrt = ["rife-superboost-tensorrt==0.1.0.dev9"]
+model-425 = ["rife-superboost-model-425==0.1.0.dev9"]
+model-425-lite = ["rife-superboost-model-425-lite==0.1.0.dev9"]
+model-426 = ["rife-superboost-model-426==0.1.0.dev9"]
+model-426-large = ["rife-superboost-model-426-large==0.1.0.dev9"]
+model-425-scale8 = ["rife-superboost-model-425-scale8==0.1.0.dev9"]
+model-426-scale8 = ["rife-superboost-model-426-scale8==0.1.0.dev9"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

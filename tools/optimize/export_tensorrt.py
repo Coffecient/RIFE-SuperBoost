@@ -11,7 +11,7 @@ import torch
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/export"))
-from assets import build_reference, read_models, sha256, write_json
+from assets import build_reference, read_prepared_models as read_models, sha256, write_json
 from network import Optimized, MixedOptimized
 from tensorrt_network import FusedEncoder, FusedSynthesis
 

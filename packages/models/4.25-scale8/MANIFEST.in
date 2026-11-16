@@ -1,0 +1,4 @@
+include README.md LICENSE LICENSE.Practical-RIFE
+recursive-include src *.json *.bin *.onnx LICENSE.Practical-RIFE
+prune src/*/assets/fp16
+prune src/*/assets/fp32

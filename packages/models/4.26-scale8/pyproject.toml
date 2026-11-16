@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=78", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rife-superboost-model-426-scale8"
+version = "0.1.0.dev9"
+description = "RIFE 4.26 tuned inference profile with first-stage scale 8"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE", "LICENSE.Practical-RIFE"]
+readme = "README.md"
+dependencies = ["RIFE-SuperBoost==0.1.0.dev9"]
+
+[project.entry-points."rife_superboost.models"]
+"4.26-scale8" = "rife_superboost_model_426_scale8:get_model"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+rife_superboost_model_426_scale8 = ["assets/*.json", "assets/*.bin", "assets/*.onnx", "assets/LICENSE.Practical-RIFE"]
